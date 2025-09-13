@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import jakarta.servlet.http.HttpServletResponse;
 import vn.hoidanit.jobhunter.domain.RestResponse;
+import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 
 @ControllerAdvice
 public class FormatRestResponse implements ResponseBodyAdvice {
@@ -39,13 +40,12 @@ public class FormatRestResponse implements ResponseBodyAdvice {
         }
 
         if (status >= 400) {
-            // case error
-            res.setError("CALL API FAILED");
-            res.setMessage(body);
+            return body;
         } else {
             // case success
             res.setData(body);
-            res.setMessage("CALL API SUCCESS");
+            ApiMessage message = returnType.getMethodAnnotation(ApiMessage.class);
+            res.setMessage(message != null ? message.value() : "CALL API SUCCESS");
         }
         return res;
     }
