@@ -1,6 +1,6 @@
 package vn.hoidanit.jobhunter.domain.dto;
 
-public class LoginDTO {
+public class ReqLoginDTO {
     private String username;
     private String password;
 
