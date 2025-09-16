@@ -103,7 +103,7 @@ public class UserController {
     public ResponseEntity<ResUpdateUserDTO> updateUser(@RequestBody User user) throws IdInvalidException {
         User updateUser = this.userService.handleUpdateUser(user);
         if (updateUser == null) {
-            throw new IdInvalidException("Id khong" + user.getId() + " ton tai");
+            throw new IdInvalidException("Id " + user.getId() + " khong ton tai");
         }
         return ResponseEntity.ok(this.userService.convertToResUpdateUserDTO(updateUser));
     }
